@@ -1,6 +1,3 @@
-import { useNavigate } from 'react-router-dom'
-import styles from './Blog.module.css'
-
 const posts = [
   {
     id: 1,
@@ -37,41 +34,45 @@ const posts = [
   },
 ]
 
-const tagClass = {
-  primary:   styles.tagPrimary,
-  secondary: styles.tagSecondary,
-  success:   styles.tagSuccess,
+const tagClasses = {
+  primary:   'bg-[rgba(108,99,255,0.12)] text-primary',
+  secondary: 'bg-[rgba(255,101,132,0.12)] text-secondary',
+  success:   'bg-[rgba(67,215,135,0.15)] text-[#1d8a4e]',
 }
 
 export default function Blog() {
-  const navigate = useNavigate()
-
   return (
-    <div className={styles.page}>
-      <header className={styles.header}>
-        <button className={styles.back} onClick={() => navigate('/')}>← Back</button>
-        <h1 className={styles.pageTitle}>Blog</h1>
-        <p className={styles.pageDesc}>
+    <div className="max-w-[900px] mx-auto px-6 py-8 min-h-screen">
+      <header className="mb-12">
+        <h1 className="text-3xl font-bold mb-2">Blog</h1>
+        <p className="text-neutral-600 dark:text-neutral-400 text-lg">
           Articles about React, design systems, and building with Claude.
         </p>
       </header>
 
-      <div className={styles.grid}>
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-6">
         {posts.map(post => (
-          <article key={post.id} className={styles.card}>
-            <div className={styles.cardTop}>
-              <span className={`${styles.tag} ${tagClass[post.tagColor]}`}>{post.tag}</span>
+          <article
+            key={post.id}
+            className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-2xl p-6 flex flex-col gap-4 transition hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-0.5"
+          >
+            <div className="flex">
+              <span className={`text-xs font-semibold px-[10px] py-[2px] rounded-full uppercase tracking-[0.06em] ${tagClasses[post.tagColor]}`}>
+                {post.tag}
+              </span>
             </div>
-            <h2 className={styles.cardTitle}>{post.title}</h2>
-            <p className={styles.cardExcerpt}>{post.excerpt}</p>
-            <div className={styles.cardFooter}>
-              <div className={styles.author}>
-                <div className={styles.avatar}>{post.author[0]}</div>
+            <h2 className="text-xl font-semibold leading-[1.35]">{post.title}</h2>
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-[1.65] flex-1">{post.excerpt}</p>
+            <div className="flex items-center justify-between text-sm text-neutral-400 pt-4 border-t border-neutral-100 dark:border-neutral-700">
+              <div className="flex items-center gap-2 text-neutral-600 dark:text-neutral-300 font-medium">
+                <div className="w-7 h-7 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center">
+                  {post.author[0]}
+                </div>
                 <span>{post.author}</span>
               </div>
-              <div className={styles.meta}>
+              <div className="flex items-center gap-1">
                 <span>{post.date}</span>
-                <span className={styles.dot}>·</span>
+                <span className="text-neutral-200">·</span>
                 <span>{post.readTime}</span>
               </div>
             </div>
