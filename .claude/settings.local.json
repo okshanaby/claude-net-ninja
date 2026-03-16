@@ -5,7 +5,8 @@
       "Bash(npm create:*)",
       "Bash(printf:*)",
       "Bash(npm install:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(npm run:*)"
     ]
   }
 }
